@@ -1,3 +1,15 @@
+## About Teledash
+
+Teledash is an open-source software for monitoring and analyzing anti-democratic content on Telegram channels and groups. 
+
+It consists of three separate repositories:
+
+- Frontend (this repository) - Web interface
+- [Backend](https://github.com/ARAI-Telegram/teledash-backend) - Core API and worker services for data collection and management. See here for more information on Teledash in general
+- [Processing Backend](https://github.com/ARAI-Telegram/teledash-backend-processing) (optional) - ML-powered services (semantic search, transcription, classification)
+
+> **For a more comprehensive overview of the Teledash project** (architecture, functionalities), please refer to the [Backend repository README](https://github.com/ARAI-Telegram/teledash-backend#readme).
+
 # Teledash Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -27,5 +39,7 @@ Make sure to change the *.env* file and change `VITE_API_URL` accordingly (e.g. 
 
 See [deployment](https://create-react-app.dev/docs/deployment/) for more information on continuous deployment and hosting options.
 
-## Backend
-See [teledash](https://github.com/democ-de/teledash) repository for further information.
+
+## Funding
+
+![DATIpilot Logo](./logoDATIpilot.png)
