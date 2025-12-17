@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Spinner } from "components/Elements";
 import { MainLayout } from "components/Layout";
 import { lazyImport } from "utils/lazyImport";
+import { Labeling, Evaluation } from "features/classification";
 
 const { Dashboard } = lazyImport(() => import("features/misc"), "Dashboard");
 const { Profile } = lazyImport(() => import("features/accounts"), "Profile");
@@ -68,6 +69,8 @@ export const protectedRoutes = [
       { path: "/account", element: <Profile /> },
       { path: "/admin", element: <Admin /> },
       { path: "/config", element: <Configuration /> },
+      { path: "/classification/evaluation", element: <Evaluation /> },
+      { path: "/classification/labeling", element: <Labeling /> },
       { path: "*", element: <Navigate to="." /> },
     ],
   },

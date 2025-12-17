@@ -11,7 +11,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Root */
+        /**
+         * Root
+         * @description API root endpoint.
+         */
         get: operations["root__get"];
         put?: never;
         post?: never;
@@ -64,7 +67,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Refresh Jwt */
+        /**
+         * Refresh Jwt
+         * @description Generate a new JWT access token for the authenticated user.
+         */
         post: operations["refresh_jwt_auth_jwt_refresh_post"];
         delete?: never;
         options?: never;
@@ -201,7 +207,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Accounts */
+        /**
+         * List Accounts
+         * @description List all user accounts with pagination (superuser only).
+         */
         get: operations["list_accounts_accounts_get"];
         put?: never;
         post?: never;
@@ -218,7 +227,14 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Messages */
+        /**
+         * List Messages
+         * @description Search and list messages with advanced filtering and multiple search modes.
+         *
+         *     Supports flexible/exact/fuzzy text search, semantic search via external service,
+         *     filtering by chat tags, date ranges, and message properties. Results are paginated
+         *     and can be sorted by various fields. Optionally updates saved search timestamps.
+         */
         get: operations["list_messages_messages_get"];
         put?: never;
         post?: never;
@@ -235,7 +251,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Messages Stats */
+        /**
+         * Get Messages Stats
+         * @description Get aggregated statistics including top hashtags, domains, and message attributes.
+         */
         get: operations["get_messages_stats_messages_stats_get"];
         put?: never;
         post?: never;
@@ -270,10 +289,16 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Clients */
+        /**
+         * List Clients
+         * @description List Telegram client sessions with filtering, sorting, and pagination.
+         */
         get: operations["list_clients_clients_get"];
         put?: never;
-        /** Create Client */
+        /**
+         * Create Client
+         * @description Create a new Telegram client session and initiate phone authentication.
+         */
         post: operations["create_client_clients_post"];
         delete?: never;
         options?: never;
@@ -289,7 +314,10 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** Verify Phone Code */
+        /**
+         * Verify Phone Code
+         * @description Verify the phone code sent to the user's device to complete authentication.
+         */
         put: operations["verify_phone_code_clients__id__verify_phone_code_put"];
         post?: never;
         delete?: never;
@@ -306,7 +334,10 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        /** Verify Password */
+        /**
+         * Verify Password
+         * @description Verify two-factor authentication password for clients with 2FA enabled.
+         */
         put: operations["verify_password_clients__id__verify_password_put"];
         post?: never;
         delete?: never;
@@ -322,12 +353,21 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Client */
+        /**
+         * Get Client
+         * @description Retrieve a single Telegram client session by ID.
+         */
         get: operations["get_client_clients__id__get"];
-        /** Update Client */
+        /**
+         * Update Client
+         * @description Update client configuration such as active status and settings.
+         */
         put: operations["update_client_clients__id__put"];
         post?: never;
-        /** Delete Client */
+        /**
+         * Delete Client
+         * @description Delete a Telegram client session and terminate its connection.
+         */
         delete: operations["delete_client_clients__id__delete"];
         options?: never;
         head?: never;
@@ -343,7 +383,10 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Add Chat */
+        /**
+         * Add Chat
+         * @description Add a chat to the client's list of chats to join for scraping.
+         */
         post: operations["add_chat_clients__client_id__add_chat_post"];
         delete?: never;
         options?: never;
@@ -358,11 +401,22 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Chats */
+        /**
+         * List Chats
+         * @description Search and list chats with optional metrics aggregation.
+         *
+         *     Supports text search across chat titles, filtering by chat type and properties,
+         *     and optionally includes aggregated message metrics (count, latest message time)
+         *     for each chat. Results include search highlighting.
+         */
         get: operations["list_chats_chats_get"];
         put?: never;
         post?: never;
-        delete?: never;
+        /**
+         * Delete Chats
+         * @description ⚠️ WARNING: Ensure clients have left these chats before deletion, or scraping will automatically restart. This deletes chat records, message indices, metrics, vectorized indices and, if requested, storage objects (attachments).
+         */
+        delete: operations["delete_chats_chats_delete"];
         options?: never;
         head?: never;
         patch?: never;
@@ -375,7 +429,11 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Chats Stats */
+        /**
+         * Get Chats Stats
+         * @description Get aggregated statistics including top tags and most frequent
+         *     chat attributes.
+         */
         get: operations["get_chats_stats_chats_stats_get"];
         put?: never;
         post?: never;
@@ -392,9 +450,16 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Chat */
+        /**
+         * Get Chat
+         * @description Retrieve a single chat with activity metrics and
+         *     classification statistics.
+         */
         get: operations["get_chat_chats__id__get"];
-        /** Update Chat */
+        /**
+         * Update Chat
+         * @description Update chat metadata such as language and tags.
+         */
         put: operations["update_chat_chats__id__put"];
         post?: never;
         delete?: never;
@@ -410,7 +475,14 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Users */
+        /**
+         * List Users
+         * @description Search and list users with filtering, sorting, and pagination.
+         *
+         *     Supports text search across usernames and names, filtering by user properties
+         *     (bot, verified, scam, etc.), and field projection. Results include search
+         *     highlighting for matched terms.
+         */
         get: operations["list_users_users_get"];
         put?: never;
         post?: never;
@@ -427,7 +499,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get User */
+        /**
+         * Get User
+         * @description Retrieve a single user profile with activity metrics and chat memberships.
+         */
         get: operations["get_user_users__id__get"];
         put?: never;
         post?: never;
@@ -439,9 +514,8 @@ export interface paths {
          *     This operation:
          *     1. Collects all storage object references from the user's messages
          *     2. Deletes all messages posted by this user
-         *     3. Checks each storage object to see if it's still referenced by other messages
-         *     4. Deletes storage objects that are no longer referenced (orphaned)
-         *     5. Deletes the user record
+         *     3. Checks each storage object and deletes orphaned ones
+         *     4. Deletes the user record
          *
          *     Args:
          *         id: The user ID to delete
@@ -466,7 +540,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Metrics */
+        /**
+         * List Metrics
+         * @description Get global statistics including total counts and aggregated activity metrics.
+         */
         get: operations["list_metrics_metrics_get"];
         put?: never;
         post?: never;
@@ -527,7 +604,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Count Unread Messages */
+        /**
+         * Count Unread Messages
+         * @description Count total and unread messages for each saved search since last visit.
+         */
         get: operations["count_unread_messages_saved_searches_count_unread_messages_get"];
         put?: never;
         post?: never;
@@ -544,8 +624,55 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List Tags */
+        /**
+         * List Tags
+         * @description Retrieve all unique message tags with optional filtering.
+         */
         get: operations["list_tags_tags_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/labeling": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Labeling Data
+         * @description Get messages for manual labeling
+         */
+        get: operations["get_labeling_data_labeling_get"];
+        put?: never;
+        /**
+         * Submit Label
+         * @description Submit manual label for a message
+         */
+        post: operations["submit_label_labeling_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/evaluation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Evaluate
+         * @description Return classification evaluation results
+         */
+        get: operations["evaluate_evaluation_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -561,7 +688,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get File */
+        /**
+         * Get File
+         * @description Retrieve and stream a file from object storage (S3/MinIO).
+         */
         get: operations["get_file_storage__bucket_name___object_name__get"];
         put?: never;
         post?: never;
@@ -984,12 +1114,54 @@ export interface components {
             /** Phone Code */
             phone_code: string;
         };
+        /**
+         * DeleteChatsRequest
+         * @description Request body for deleting multiple chats.
+         */
+        DeleteChatsRequest: {
+            /** Chat Ids */
+            chat_ids: number[];
+            /**
+             * Delete Attachments
+             * @default false
+             */
+            delete_attachments: boolean;
+        };
         /** ErrorModel */
         ErrorModel: {
             /** Detail */
             detail: string | {
                 [key: string]: string;
             };
+        };
+        /**
+         * EvaluationMetrics
+         * @description Evaluation metrics for the positive class (class 1) only.
+         */
+        EvaluationMetrics: {
+            /** Accuracy */
+            accuracy: number;
+            /** Precision */
+            precision: number;
+            /** Recall */
+            recall: number;
+            /** F1 Score */
+            f1_score: number;
+            /** True Positives */
+            true_positives: number;
+            /** True Negatives */
+            true_negatives: number;
+            /** False Positives */
+            false_positives: number;
+            /** False Negatives */
+            false_negatives: number;
+        };
+        /** EvaluationResult */
+        EvaluationResult: {
+            /** Num Labeled Data */
+            num_labeled_data: number;
+            metrics: components["schemas"]["EvaluationMetrics"];
+            recommendation?: components["schemas"]["Recommendation"] | null;
         };
         /** GlobalMetrics */
         GlobalMetrics: {
@@ -1013,6 +1185,38 @@ export interface components {
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /**
+         * LabeledDataIn
+         * @description Model for submitting a manual label (POST request).
+         */
+        LabeledDataIn: {
+            /** Message Id */
+            message_id: string;
+            /**
+             * Label Manual
+             * @enum {integer}
+             */
+            label_manual: 0 | 1;
+        };
+        /**
+         * LabeledDataOut
+         * @description Model for labeled data returned from API (POST response).
+         */
+        LabeledDataOut: {
+            /** Message Id */
+            message_id: string;
+            /** Text */
+            text: string;
+            /** Label Classifier */
+            label_classifier?: (0 | 1) | null;
+            /** Label Manual */
+            label_manual?: (0 | 1) | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** ListMessagesParams */
         ListMessagesParams: {
@@ -1089,6 +1293,18 @@ export interface components {
          * @enum {string}
          */
         MessageEntityType: "mention" | "hashtag" | "cashtag" | "bot_command" | "url" | "email" | "phone_number" | "bold" | "italic" | "underline" | "strikethrough" | "spoiler" | "code" | "pre" | "blockquote" | "text_link" | "text_mention" | "bank_card" | "custom_emoji" | "unknown";
+        /**
+         * MessageForLabeling
+         * @description Lightweight model for messages in the labeling workflow (GET response).
+         */
+        MessageForLabeling: {
+            /** Id */
+            id: string;
+            /** Text */
+            text: string;
+            /** Label Classifier */
+            label_classifier?: (0 | 1) | null;
+        };
         /** MessageForward */
         MessageForward: {
             from_user?: components["schemas"]["UserRef"] | null;
@@ -1343,6 +1559,13 @@ export interface components {
             /** Count Total */
             count_total: number | null;
         };
+        /** Recommendation */
+        Recommendation: {
+            /** Sample Assessment */
+            sample_assessment: string;
+            /** Metrics Interpretation */
+            metrics_interpretation: string;
+        };
         /** SavedSearchIn */
         SavedSearchIn: {
             /** Name */
@@ -1542,7 +1765,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": {
+                        [key: string]: string;
+                    };
                 };
             };
         };
@@ -1635,7 +1860,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": {
+                        [key: string]: string;
+                    };
                 };
             };
         };
@@ -2580,6 +2807,41 @@ export interface operations {
             };
         };
     };
+    delete_chats_chats_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DeleteChatsRequest"];
+            };
+        };
+        responses: {
+            /** @description Delete multiple chats and their related data */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_chats_stats_chats_stats_get: {
         parameters: {
             query?: {
@@ -2739,7 +3001,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Get a single user */
+            /** @description Get a user profile */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -2776,7 +3038,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": {
+                        [key: string]: string | number;
+                    };
                 };
             };
             /** @description Validation Error */
@@ -2951,6 +3215,90 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_labeling_data_labeling_get: {
+        parameters: {
+            query?: {
+                seed?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageForLabeling"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    submit_label_labeling_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LabeledDataIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LabeledDataOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    evaluate_evaluation_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EvaluationResult"];
                 };
             };
         };

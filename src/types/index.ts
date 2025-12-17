@@ -93,3 +93,14 @@ export type GlobalMetricsResponse =
 export type FastApiError = API.components["schemas"]["ErrorModel"];
 
 export type SortBy = ChatSortBy | MessageSortBy | UserSortBy | ClientSortBy;
+
+// Labeling
+export type MessageForLabeling =
+  API.components["schemas"]["MessageForLabeling"];
+export type LabeledDataIn = API.components["schemas"]["LabeledDataIn"];
+export type LabeledDataOut = API.components["schemas"]["LabeledDataOut"];
+
+// Evaluation
+export type EvaluationResult = API.components["schemas"]["EvaluationResult"];
+export type EvaluationMetrics = API.components["schemas"]["EvaluationMetrics"];
+export type Recommendation = API.components["schemas"]["Recommendation"];
