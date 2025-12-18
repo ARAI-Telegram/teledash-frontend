@@ -59,7 +59,7 @@ export const Labeling = () => {
         <div className="text-red-500">Error: {error?.message}</div>
       ) : !message ? (
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
-          <p className="text-gray-600">No message data available</p>
+          <p className="text-gray-600">No messages available for labeling</p>
           <div>
             <Link to="/classification/evaluation">
               <Button variant="secondary">Back to Evaluation</Button>
