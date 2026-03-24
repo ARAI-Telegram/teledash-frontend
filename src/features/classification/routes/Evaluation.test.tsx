@@ -34,7 +34,7 @@ describe("Evaluation", () => {
   it("shows empty state when no evaluation data", async () => {
     server.use(
       http.get(`${API_URL}/evaluation`, () => {
-        return HttpResponse.json(null);
+        return new HttpResponse(null, { status: 204 });
       }),
     );
 
