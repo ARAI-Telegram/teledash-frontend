@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, LoadingState } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 
-import { useLabelingMessage, useSubmitLabel } from "features/classification";
+import { useLabelingMessage, useSubmitLabel } from "../api";
 
 export const Labeling = () => {
   const { data: message, isLoading, error, refetch } = useLabelingMessage();
