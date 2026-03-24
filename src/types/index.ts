@@ -90,6 +90,9 @@ export type ListMessagesParams =
 export type GlobalMetricsResponse =
   API.paths["/metrics"]["get"]["responses"]["200"]["content"]["application/json"];
 
+export type DeleteChatResponse =
+  API.components["schemas"]["DeleteChatResponse"];
+
 export type FastApiError = API.components["schemas"]["ErrorModel"];
 
 export type SortBy = ChatSortBy | MessageSortBy | UserSortBy | ClientSortBy;

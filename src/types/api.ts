@@ -412,11 +412,7 @@ export interface paths {
         get: operations["list_chats_chats_get"];
         put?: never;
         post?: never;
-        /**
-         * Delete Chats
-         * @description ⚠️ WARNING: Ensure clients have left these chats before deletion, or scraping will automatically restart. This deletes chat records, message indices, metrics, vectorized indices and, if requested, storage objects (attachments).
-         */
-        delete: operations["delete_chats_chats_delete"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -462,7 +458,23 @@ export interface paths {
          */
         put: operations["update_chat_chats__id__put"];
         post?: never;
-        delete?: never;
+        /**
+         * Delete Chat
+         * @description Leave and/or delete a single chat and its related data.
+         *
+         *     - `leave`: Leave the chat in Telegram
+         *     - `delete`: Delete all chat data (record, messages, metrics, vectorized index)
+         *     - `attachments`: Also delete attachment files from storage — requires `delete=true`
+         *
+         *     Leave is always performed before deletion to prevent new data arriving
+         *     during the deletion process.
+         *
+         *     Attachment deletion: after the chat's messages are removed, any storage file
+         *     that is no longer referenced by any message in the database is deleted. This
+         *     means files shared with other chats (e.g. via forwarding) are kept, but files
+         *     exclusively used by this chat are removed.
+         */
+        delete: operations["delete_chat_chats__id__delete"];
         options?: never;
         head?: never;
         patch?: never;
@@ -673,26 +685,6 @@ export interface paths {
          * @description Return classification evaluation results
          */
         get: operations["evaluate_evaluation_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/storage/{bucket_name}/{object_name}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get File
-         * @description Retrieve and stream a file from object storage (S3/MinIO).
-         */
-        get: operations["get_file_storage__bucket_name___object_name__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1115,17 +1107,16 @@ export interface components {
             phone_code: string;
         };
         /**
-         * DeleteChatsRequest
-         * @description Request body for deleting multiple chats.
+         * DeleteChatResponse
+         * @description Response for the delete chat endpoint.
          */
-        DeleteChatsRequest: {
-            /** Chat Ids */
-            chat_ids: number[];
-            /**
-             * Delete Attachments
-             * @default false
-             */
-            delete_attachments: boolean;
+        DeleteChatResponse: {
+            /** Leave Results */
+            leave_results?: components["schemas"]["LeaveChatResult"][] | null;
+            /** Deleted Storage Objects */
+            deleted_storage_objects?: number | null;
+            /** Errors */
+            errors?: string[] | null;
         };
         /** ErrorModel */
         ErrorModel: {
@@ -1217,6 +1208,18 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+        };
+        /**
+         * LeaveChatResult
+         * @description Result of leaving a chat for a single client.
+         */
+        LeaveChatResult: {
+            /** Client Id */
+            client_id: string;
+            /** Success */
+            success: boolean;
+            /** Message */
+            message?: string | null;
         };
         /** ListMessagesParams */
         ListMessagesParams: {
@@ -2807,41 +2810,6 @@ export interface operations {
             };
         };
     };
-    delete_chats_chats_delete: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["DeleteChatsRequest"];
-            };
-        };
-        responses: {
-            /** @description Delete multiple chats and their related data */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: unknown;
-                    };
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
     get_chats_stats_chats_stats_get: {
         parameters: {
             query?: {
@@ -2932,6 +2900,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ChatOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_chat_chats__id__delete: {
+        parameters: {
+            query?: {
+                leave?: boolean;
+                delete?: boolean;
+                attachments?: boolean;
+            };
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Leave and/or delete a chat and its data */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteChatResponse"];
                 };
             };
             /** @description Validation Error */
@@ -3299,54 +3302,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["EvaluationResult"];
-                };
-            };
-        };
-    };
-    get_file_storage__bucket_name___object_name__get: {
-        parameters: {
-            query?: {
-                attachment?: boolean;
-            };
-            header?: never;
-            path: {
-                bucket_name: string;
-                object_name: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Requested file from storage. Can be of any media type. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "*/*": unknown;
-                };
-            };
-            /** @description Any other error why the file could not be fetched. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description The bucket or file was not found. */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
