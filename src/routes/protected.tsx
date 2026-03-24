@@ -4,7 +4,6 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Spinner } from "components/Elements";
 import { MainLayout } from "components/Layout";
 import { lazyImport } from "utils/lazyImport";
-import { Labeling, Evaluation } from "features/classification";
 
 const { Dashboard } = lazyImport(() => import("features/misc"), "Dashboard");
 const { Profile } = lazyImport(() => import("features/accounts"), "Profile");
@@ -25,6 +24,14 @@ const { SavedSearches } = lazyImport(
 const { Search } = lazyImport(() => import("features/search"), "Search");
 const { User } = lazyImport(() => import("features/users"), "User");
 const { TagView } = lazyImport(() => import("features/tags"), "TagView");
+const { Labeling } = lazyImport(
+  () => import("features/classification"),
+  "Labeling",
+);
+const { Evaluation } = lazyImport(
+  () => import("features/classification"),
+  "Evaluation",
+);
 
 const App = () => {
   return (
