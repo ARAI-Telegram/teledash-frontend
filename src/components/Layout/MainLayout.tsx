@@ -11,21 +11,22 @@ import {
 } from "@headlessui/react";
 import {
   mdiAccount,
+  mdiBookmark,
+  mdiBrain,
   mdiCloseCircle,
+  mdiCog,
   mdiHome,
   mdiMagnify,
   mdiMenu,
-  mdiCog,
-  mdiBookmark,
   mdiTag,
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import clsx from "clsx";
 import * as React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { useCountTotalUnreadMessages } from "features/saved-searches";
-import { useUser, useLogout } from "lib/auth";
+import { useLogout, useUser } from "lib/auth";
 
 import { APP_NAME } from "config";
 
@@ -75,6 +76,11 @@ const SideNavigation = ({ onItemClick }: { onItemClick?: () => void }) => {
       name: "Configuration",
       to: "./config",
       icon: mdiCog,
+    },
+    {
+      name: "Classification",
+      to: "./classification/evaluation",
+      icon: mdiBrain,
     },
   ].filter(Boolean) as SideNavigationItem[];
 

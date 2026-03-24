@@ -17,6 +17,10 @@ const variants = {
     "text-indigo-600 border-gray-300 bg-white shadow-sm hover:bg-gray-200 focus:ring-indigo-500",
   danger:
     "bg-red-600 text-white border-transparent hover:bg-red-200 hover:text-red-600 hover:border-red-600",
+  "classification-label-yes":
+    "text-white border-blue-500 bg-blue-500 hover:border-blue-600 hover:bg-blue-600 focus:ring-blue-500 disabled:opacity-50",
+  "classification-label-no":
+    "text-white border-gray-400 bg-gray-400 hover:border-gray-500 hover:bg-gray-500 focus:ring-gray-400 disabled:opacity-50",
 };
 
 const sizes = {

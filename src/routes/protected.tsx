@@ -24,6 +24,14 @@ const { SavedSearches } = lazyImport(
 const { Search } = lazyImport(() => import("features/search"), "Search");
 const { User } = lazyImport(() => import("features/users"), "User");
 const { TagView } = lazyImport(() => import("features/tags"), "TagView");
+const { Labeling } = lazyImport(
+  () => import("features/classification"),
+  "Labeling",
+);
+const { Evaluation } = lazyImport(
+  () => import("features/classification"),
+  "Evaluation",
+);
 
 const App = () => {
   return (
@@ -68,6 +76,8 @@ export const protectedRoutes = [
       { path: "/account", element: <Profile /> },
       { path: "/admin", element: <Admin /> },
       { path: "/config", element: <Configuration /> },
+      { path: "/classification/evaluation", element: <Evaluation /> },
+      { path: "/classification/labeling", element: <Labeling /> },
       { path: "*", element: <Navigate to="." /> },
     ],
   },
