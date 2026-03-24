@@ -20,7 +20,7 @@ export const Labeling = () => {
     });
   };
 
-  // Add keyboard support for arrow keys
+  // Add keyboard support for Y/N keys
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       // Don't trigger if submitting
