@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, LoadingState } from "components/Elements";
 import { ContentLayout } from "components/Layout";
 
-import { useEvaluation } from "features/classification";
+import { useEvaluation } from "../api";
 
 export const Evaluation = () => {
   const { data: evaluation, isLoading, error, refetch } = useEvaluation();
