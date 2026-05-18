@@ -238,6 +238,7 @@ export const Message = (props: MessageType) => {
                 rating={classification_score_pos}
                 className="p-2"
                 type="gauge"
+                size="lg"
                 description="The classification score for this message as rated by the active classifier."
               />
             </div>
