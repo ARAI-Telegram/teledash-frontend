@@ -1,0 +1,27 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, staging, dev]
+  pull_request:
+    branches: [main, staging, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx vitest --run
+        env:
+          VITE_API_URL: http://localhost:8000
+          VITE_NAME: teledash
+          VITE_VERSION: 0.0.0-test
