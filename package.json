@@ -82,7 +82,7 @@
     "vite": "^6.3.5",
     "vite-plugin-checker": "^0.9.3",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.6"
   },
   "overrides": {
     "typescript": "^5.5.4",
