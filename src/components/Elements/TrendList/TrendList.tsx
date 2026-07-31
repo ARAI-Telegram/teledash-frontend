@@ -1,10 +1,12 @@
 import { mdiCounter, mdiTrophyOutline } from "@mdi/js";
+import clsx from "clsx";
 import { startCase } from "lodash";
 import { Link } from "react-router-dom";
 
 import { ListBox, ListBoxProps } from "components/Elements";
 
 import { SavedSearch, SavedSearchesMessagesCountDict, StatsEntry } from "types";
+import { formatNumber } from "utils/formatNumber";
 
 // ListBoxProps<StatsEntry> with optional children
 type StatsEntryTrendListProps = Omit<ListBoxProps<StatsEntry>, "children"> &
@@ -228,7 +230,7 @@ export function SavedSearchesMessagesCountTrendList({
       length={length}
     >
       {(savedSearchCounts) => (
-        <li key={savedSearchCounts.name} className="flex gap-4">
+        <li key={savedSearchCounts.name} className="flex items-center gap-4">
           <span className="flex-1 truncate font-medium">
             <Link
               className="hover:underline"
@@ -237,11 +239,18 @@ export function SavedSearchesMessagesCountTrendList({
               {savedSearchCounts.name}
             </Link>
           </span>
-          <span className="flex-shrink-0 font-bold text-green-600">
-            {savedSearchCounts.countUnread}{" "}
+          <span
+            className={clsx(
+              "w-14 flex-shrink-0 text-right font-bold tabular-nums",
+              savedSearchCounts.countUnread > 0
+                ? "text-green-600"
+                : "text-gray-400",
+            )}
+          >
+            {formatNumber(savedSearchCounts.countUnread ?? 0)}
           </span>
-          <span className="flex-shrink-0 font-bold">
-            {savedSearchCounts.countTotal}
+          <span className="w-14 flex-shrink-0 text-right font-bold tabular-nums">
+            {formatNumber(savedSearchCounts.countTotal ?? 0)}
           </span>
         </li>
       )}
