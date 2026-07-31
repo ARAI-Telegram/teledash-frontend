@@ -33,7 +33,9 @@ export function StatsEntryTrendList({
         ) : (
           <li key={entry.value} className="flex justify-between gap-4">
             <span className="truncate font-medium">{entry.value} </span>
-            <span className="font-bold">{entry.count}</span>
+            <span className="font-bold tabular-nums">
+              {formatNumber(entry.count)}
+            </span>
           </li>
         )
       }
@@ -91,7 +93,9 @@ export function SearchQueryTrendList({
               {entry.value}
             </Link>
           )}
-          <span className="font-bold">{entry.count}</span>
+          <span className="font-bold tabular-nums">
+            {formatNumber(entry.count)}
+          </span>
         </li>
       )}
     </StatsEntryTrendList>
@@ -149,7 +153,9 @@ export function AttachmentTypesTrendList({
                 .join(" ")}
             </Link>
           )}
-          <span className="font-bold">{entry.count}</span>
+          <span className="font-bold tabular-nums">
+            {formatNumber(entry.count)}
+          </span>
         </li>
       )}
     </StatsEntryTrendList>
@@ -183,7 +189,9 @@ export function TagsTrendList({
           >
             {entry.value}
           </Link>
-          <span className="font-bold">{entry.count}</span>
+          <span className="font-bold tabular-nums">
+            {formatNumber(entry.count)}
+          </span>
         </li>
       )}
     </StatsEntryTrendList>
