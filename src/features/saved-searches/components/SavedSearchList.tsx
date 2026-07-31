@@ -47,15 +47,17 @@ export function SavedSearchList() {
                       {savedSearch.name}
                     </Link>
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex items-center gap-4">
                     <MessagesCount
                       count={count_unread}
                       variant="unread"
                       status={messagesStatus}
+                      className="w-24"
                     />
                     <MessagesCount
                       count={count_total}
                       status={messagesStatus}
+                      className="w-24"
                     />
                     <DeleteSavedSearch savedSearch={savedSearch} />
                   </div>
