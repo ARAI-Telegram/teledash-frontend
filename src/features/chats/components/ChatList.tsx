@@ -15,6 +15,7 @@ import {
   ChatListTags,
   ChatSortSelector,
   createChatBadgesArray,
+  DeleteChat,
   TooltipChatLink,
   useChats,
 } from "features/chats";
@@ -65,7 +66,7 @@ const ChatListItem = (props: Chat) => {
       : undefined;
 
   return (
-    <li className="col-span-4 grid grid-cols-1 gap-x-4 px-4 py-2 sm:px-6 lg:col-span-4 lg:grid-cols-subgrid lg:grid-rows-none lg:items-center">
+    <li className="col-span-5 grid grid-cols-1 gap-x-4 px-4 py-2 sm:px-6 lg:col-span-5 lg:grid-cols-subgrid lg:grid-rows-none lg:items-center">
       {/* Title + badges (always first) */}
       <div className="flex min-w-0 items-center lg:col-start-1">
         <div className="flex min-w-0 flex-wrap items-center gap-2 lg:flex-nowrap">
@@ -126,6 +127,11 @@ const ChatListItem = (props: Chat) => {
                 </span>
               </>
             )}
+          </div>
+
+          {/* Delete */}
+          <div className="flex items-center lg:col-start-5">
+            <DeleteChat chat={props} />
           </div>
         </div>
       </div>
@@ -188,7 +194,7 @@ export const ChatList = ({ queryParams, onUpdateSort }: ChatListProps) => {
             />
           </div>
           <div className="-mx-4 bg-white shadow sm:mx-0 sm:rounded-lg">
-            <ul className="grid grid-cols-[1fr_min-content_min-content_min-content] divide-y divide-gray-200">
+            <ul className="grid grid-cols-[1fr_min-content_min-content_min-content_min-content] divide-y divide-gray-200">
               {data.pages.map((page, index) => (
                 <Fragment key={index}>
                   {page.data.map((chat) => (
